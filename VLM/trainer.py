@@ -349,6 +349,7 @@ def main():
         per_device_train_batch_size=tcfg.get("per_device_train_batch_size", 8),
         gradient_accumulation_steps=tcfg.get("gradient_accumulation_steps", 2),
         num_train_epochs=tcfg.get("num_train_epochs", 10),
+        max_steps=tcfg.get("max_steps", -1),
         learning_rate=tcfg.get("learning_rate", 3e-5),
         dataloader_num_workers=tcfg.get("dataloader_num_workers", 8),
         max_pixels=tcfg.get("max_pixels", 1500000),
