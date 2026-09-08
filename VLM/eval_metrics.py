@@ -1,3 +1,4 @@
+import argparse
 import os
 import sys
 import yaml
@@ -58,11 +59,14 @@ def evaluate_set(gt_csv_path, pred_csv_path, set_name="SET", weight_factor=0.5, 
 # -----------------------------
 if __name__ == "__main__":
 
-    default_config = os.path.join(os.path.dirname(__file__), "config.yaml")
+    # default_config = os.path.join(os.path.dirname(__file__), "config.yaml")
+    parser = argparse.ArgumentParser()    
+    parser.add_argument("--config", default="config.yaml")
+    args = parser.parse_args()
 
     cfg = {}
-    if os.path.exists(default_config):
-        with open(default_config, "r") as f:
+    if os.path.exists(args.config):
+        with open(args.config, "r") as f:
             cfg = yaml.safe_load(f) or {}
 
     cfg_eval = cfg.get("evaluation", {})
