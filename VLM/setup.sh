@@ -98,18 +98,18 @@ fi
 echo "✅ Conda is available"
 echo "📋 Using Python version: $PYTHON_VERSION"
 
-# Create environment if it doesn't exist
-if conda env list | awk '{print $1}' | grep -Fxq "$ENV_NAME"; then
-  echo "⏭️  Conda environment '$ENV_NAME' already exists. Skipping creation."
-else
-  echo "🔨 Creating conda environment '$ENV_NAME' with python=$PYTHON_VERSION..."
-  conda create -y -n "$ENV_NAME" python="$PYTHON_VERSION" pip
-  echo "✅ Environment created successfully!"
-fi
+# # Create environment if it doesn't exist
+# if conda env list | awk '{print $1}' | grep -Fxq "$ENV_NAME"; then
+#   echo "⏭️  Conda environment '$ENV_NAME' already exists. Skipping creation."
+# else
+#   echo "🔨 Creating conda environment '$ENV_NAME' with python=$PYTHON_VERSION..."
+#   conda create -y -n "$ENV_NAME" python="$PYTHON_VERSION" pip
+#   echo "✅ Environment created successfully!"
+# fi
 
-# Activate the environment
-echo "🔄 Activating environment '$ENV_NAME'..."
-conda activate "$ENV_NAME"
+# # Activate the environment
+# echo "🔄 Activating environment '$ENV_NAME'..."
+# conda activate "$ENV_NAME"
 
 # Upgrade pip and install requirements
 echo "📦 Upgrading pip..."
@@ -122,6 +122,6 @@ echo ""
 echo "======================================"
 echo "✅ Setup complete!"
 echo "======================================"
-echo "To activate the environment in a new shell, run:"
-echo "  conda activate $ENV_NAME"
+# echo "To activate the environment in a new shell, run:"
+# echo "  conda activate $ENV_NAME"
 echo ""
