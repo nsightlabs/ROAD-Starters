@@ -21,81 +21,81 @@ echo "======================================"
 echo "  VLM Environment Setup"
 echo "======================================"
 
-# Function to install Miniconda
-install_miniconda() {
-  echo "📦 Conda not found. Installing Miniconda..."
+# # Function to install Miniconda
+# install_miniconda() {
+#   echo "📦 Conda not found. Installing Miniconda..."
   
-  MINICONDA_DIR="$HOME/miniconda3"
+#   MINICONDA_DIR="$HOME/miniconda3"
   
-  if [ -d "$MINICONDA_DIR" ]; then
-    echo "⚠️  Miniconda directory already exists at $MINICONDA_DIR"
-    echo "   Attempting to use existing installation..."
-  else
-    # Detect OS
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-      MINICONDA_URL="https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA_VERSION}-Linux-x86_64.sh"
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
-      # Check if ARM or Intel Mac
-      if [[ $(uname -m) == "arm64" ]]; then
-        MINICONDA_URL="https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA_VERSION}-MacOSX-arm64.sh"
-      else
-        MINICONDA_URL="https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA_VERSION}-MacOSX-x86_64.sh"
-      fi
-    else
-      echo "❌ Unsupported operating system: $OSTYPE"
-      echo "   Please install Miniconda manually from https://docs.conda.io/en/latest/miniconda.html"
-      exit 1
-    fi
+#   if [ -d "$MINICONDA_DIR" ]; then
+#     echo "⚠️  Miniconda directory already exists at $MINICONDA_DIR"
+#     echo "   Attempting to use existing installation..."
+#   else
+#     # Detect OS
+#     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+#       MINICONDA_URL="https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA_VERSION}-Linux-x86_64.sh"
+#     elif [[ "$OSTYPE" == "darwin"* ]]; then
+#       # Check if ARM or Intel Mac
+#       if [[ $(uname -m) == "arm64" ]]; then
+#         MINICONDA_URL="https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA_VERSION}-MacOSX-arm64.sh"
+#       else
+#         MINICONDA_URL="https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA_VERSION}-MacOSX-x86_64.sh"
+#       fi
+#     else
+#       echo "❌ Unsupported operating system: $OSTYPE"
+#       echo "   Please install Miniconda manually from https://docs.conda.io/en/latest/miniconda.html"
+#       exit 1
+#     fi
     
-    MINICONDA_INSTALLER="/tmp/miniconda_installer.sh"
+#     MINICONDA_INSTALLER="/tmp/miniconda_installer.sh"
     
-    echo "📥 Downloading Miniconda from $MINICONDA_URL..."
-    curl -fsSL "$MINICONDA_URL" -o "$MINICONDA_INSTALLER"
+#     echo "📥 Downloading Miniconda from $MINICONDA_URL..."
+#     curl -fsSL "$MINICONDA_URL" -o "$MINICONDA_INSTALLER"
     
-    echo "🔧 Installing Miniconda to $MINICONDA_DIR..."
-    bash "$MINICONDA_INSTALLER" -b -p "$MINICONDA_DIR"
+#     echo "🔧 Installing Miniconda to $MINICONDA_DIR..."
+#     bash "$MINICONDA_INSTALLER" -b -p "$MINICONDA_DIR"
     
-    rm "$MINICONDA_INSTALLER"
-    echo "✅ Miniconda installed successfully!"
-  fi
+#     rm "$MINICONDA_INSTALLER"
+#     echo "✅ Miniconda installed successfully!"
+#   fi
   
-  # Initialize conda for bash
-  if [ -f "$MINICONDA_DIR/etc/profile.d/conda.sh" ]; then
-    source "$MINICONDA_DIR/etc/profile.d/conda.sh"
-  else
-    echo "❌ Conda initialization script not found!"
-    exit 1
-  fi
+#   # Initialize conda for bash
+#   if [ -f "$MINICONDA_DIR/etc/profile.d/conda.sh" ]; then
+#     source "$MINICONDA_DIR/etc/profile.d/conda.sh"
+#   else
+#     echo "❌ Conda initialization script not found!"
+#     exit 1
+#   fi
   
-  conda init bash
-  echo "✅ Conda initialized. You may need to restart your shell or run 'source ~/.bashrc'"
-}
+#   conda init bash
+#   echo "✅ Conda initialized. You may need to restart your shell or run 'source ~/.bashrc'"
+# }
 
-# Check if conda is available
-if ! command -v conda >/dev/null 2>&1; then
-  install_miniconda
-fi
+# # Check if conda is available
+# if ! command -v conda >/dev/null 2>&1; then
+#   install_miniconda
+# fi
 
-# Initialize conda in current shell
-if command -v conda >/dev/null 2>&1; then
-  eval "$(conda shell.bash hook)"
-else
-  # Try to source from common locations
-  for CONDA_PATH in "$HOME/miniconda3" "$HOME/anaconda3" "/opt/conda" "/opt/miniconda3" "/opt/anaconda3"; do
-    if [ -f "$CONDA_PATH/etc/profile.d/conda.sh" ]; then
-      source "$CONDA_PATH/etc/profile.d/conda.sh"
-      eval "$(conda shell.bash hook)"
-      break
-    fi
-  done
-fi
+# # Initialize conda in current shell
+# if command -v conda >/dev/null 2>&1; then
+#   eval "$(conda shell.bash hook)"
+# else
+#   # Try to source from common locations
+#   for CONDA_PATH in "$HOME/miniconda3" "$HOME/anaconda3" "/opt/conda" "/opt/miniconda3" "/opt/anaconda3"; do
+#     if [ -f "$CONDA_PATH/etc/profile.d/conda.sh" ]; then
+#       source "$CONDA_PATH/etc/profile.d/conda.sh"
+#       eval "$(conda shell.bash hook)"
+#       break
+#     fi
+#   done
+# fi
 
-if ! command -v conda >/dev/null 2>&1; then
-  echo "❌ Conda still not available. Please restart your shell and run this script again."
-  exit 1
-fi
+# if ! command -v conda >/dev/null 2>&1; then
+#   echo "❌ Conda still not available. Please restart your shell and run this script again."
+#   exit 1
+# fi
 
-echo "✅ Conda is available"
+# echo "✅ Conda is available"
 echo "📋 Using Python version: $PYTHON_VERSION"
 
 # # Create environment if it doesn't exist
